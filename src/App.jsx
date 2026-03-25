@@ -25,8 +25,8 @@ function App() {
   const [nuevaCat, setNuevaCat] = useState({ Nombre: '', Color: 'bg-purple-100 text-purple-800' })
 
   const cargarDatos = () => {
-    fetch('http://eisenhower-backend-dogg5r-c225d2-72-61-3-11.traefik.me:3000/api/tareas').then(res => res.json()).then(setTareas)
-    fetch('http://eisenhower-backend-dogg5r-c225d2-72-61-3-11.traefik.me:3000/api/categorias').then(res => res.json()).then(data => {
+    fetch('https://eisenhower-backend.soltechn.cloud:3000/api/tareas').then(res => res.json()).then(setTareas)
+    fetch('https://eisenhower-backend.soltechn.cloud:3000/api/categorias').then(res => res.json()).then(data => {
       setCategorias(data);
       if (data.length > 0 && nuevaTarea.Categoria === '') setNuevaTarea({ ...nuevaTarea, Categoria: data[0].Nombre });
     })
@@ -37,7 +37,7 @@ function App() {
   // --- Funciones de Tareas ---
   const handleGuardarTarea = async (e) => {
     e.preventDefault()
-    await fetch('http://eisenhower-backend-dogg5r-c225d2-72-61-3-11.traefik.me:3000/api/tareas', {
+    await fetch('https://eisenhower-backend.soltechn.cloud:3000/api/tareas', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(nuevaTarea)
     })
     cargarDatos()
@@ -46,13 +46,13 @@ function App() {
   }
 
   const completarTarea = async (id) => {
-    await fetch(`http://eisenhower-backend-dogg5r-c225d2-72-61-3-11.traefik.me:3000/api/tareas/${id}/completar`, { method: 'PUT' })
+    await fetch(`https://eisenhower-backend.soltechn.cloud:3000/api/tareas/${id}/completar`, { method: 'PUT' })
     cargarDatos()
   }
 
   const eliminarTarea = async (id) => {
     if (window.confirm('¿Eliminar esta tarea permanentemente?')) {
-      await fetch(`http://eisenhower-backend-dogg5r-c225d2-72-61-3-11.traefik.me:3000/api/tareas/${id}`, { method: 'DELETE' })
+      await fetch(`https://eisenhower-backend.soltechn.cloud:3000/api/tareas/${id}`, { method: 'DELETE' })
       cargarDatos()
     }
   }
@@ -60,7 +60,7 @@ function App() {
   // --- Funciones de Categorías ---
   const handleGuardarCategoria = async (e) => {
     e.preventDefault()
-    await fetch('http://eisenhower-backend-dogg5r-c225d2-72-61-3-11.traefik.me:3000/api/categorias', {
+    await fetch('https://eisenhower-backend.soltechn.cloud:3000/api/categorias', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(nuevaCat)
     })
     cargarDatos()
